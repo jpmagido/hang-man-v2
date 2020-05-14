@@ -2,7 +2,11 @@ require './lib/dialog.rb'
 require './lib/player.rb'
 
 class Game
-  attr_accessor :player
+  attr_accessor :player, :difficulty
+
+  def initialize
+    @difficulty = 0
+  end
 
   def perform
     start
@@ -17,7 +21,7 @@ class Game
     puts Dialog.player_name_message
     print '> '
     @player = Player.new(gets.chomp)
-    puts "Welcome #{@player.name} "
+    puts "Welcome dear #{@player.name}, game is starting soon"
   end
 end
 

@@ -2,23 +2,24 @@ require './game.rb'
 require './lib/dialog.rb'
 
 RSpec.describe Game do
-  let(:player_lucas) { Player.new('lucas')}
+  context 'Game starts' do
+    #let(:player_lucas) { Player.new('Lucas') }
+    let(:player) { Player.new('Lucas') }
 
-  subject { Game.new }
+    subject { Game.new}
 
-  before do
-    allow(Dialog).to receive(:start_game_message).and_return('Hello, welcome in our Hang-man Game')
-    allow(Player.new).to receive(:choose_name)
+    it 'should delegate the writings to Dialog' do
+      allow(Dialog).to receive(:start_game_message)
+      subject.start
+      expect(Dialog).to have_received(:start_game_message)
+    end
+
+    it 'should delagate name choosing to Player' do
+      allow(Dialog).to receive(:player_name_message)
+      allow(Player).to receive(:new).and_return(player)
+      subject.create_player
+      expect(Dialog).to have_received(:player_name_message)
+      expect(Player).to have_received(:new)
+    end
   end
-
-  xit 'should delagate name choosing to Player' do
-    subject.create_player
-    expect(Player.new).to have_received(:new)
-  end
-
-  it 'should delegate the writings to Dialog' do
-    subject.start
-    expect(Dialog).to have_received(:start_game_message)
-  end
-
 end

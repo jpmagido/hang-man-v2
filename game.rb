@@ -1,11 +1,11 @@
 require './lib/dialog.rb'
-require './lib/player.rb'
 
 class Game
-  attr_accessor :player, :difficulty
+  attr_accessor :difficulty, :player_name
 
   def initialize
     @difficulty = 0
+    @player_name = ''
   end
 
   def perform
@@ -18,19 +18,19 @@ class Game
     puts Dialog.start_game_message
   end
 
-  def create_player
+  def create_player(input_player = gets.chomp)
     puts Dialog.player_name_message
     print '> '
-    @player = Player.new($stdin.gets.chomp)
-    puts "Welcome dear #{@player.name}, game is starting soon"
+    @player_name = input_player
+    puts "Welcome dear #{@player_name}, game is starting soon"
   end
 
-  def chose_difficulty
+  def chose_difficulty(input_player = gets.chomp.to_i)
     puts Dialog.chose_difficulty
     print '> '
-    @difficulty = $stdin.gets.chomp.to_i until @difficulty.between?(1, 3)
+    @difficulty = input_player until @difficulty.between?(1, 3)
     puts "Difficulty will be #{@difficulty}"
   end
 end
 
-Game.new.perform
+#Game.new.perform

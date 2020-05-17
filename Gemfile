@@ -4,4 +4,4 @@ source "https://rubygems.org"
 
 git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
-gem 'faker', '~> 2.11'
+gem 'ffaker', '~> 2.14'

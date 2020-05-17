@@ -7,21 +7,19 @@ class Scaffold
 
   def display
     LEVELS[@level]
-    #Scaffold.method(LEVELS[@level])
     #puts ''
     #puts ''
-    #self.send(LEVELS[@level])
     #puts "il vous reste #{8 - @level} essais"
   end
 =begin
   def death?
     (8 - @leve#l).positive?
   end
+=end
 
   def level_up
     @level += 1
   end
-=end
 
   LEVELS = {
     0 => :bottom,

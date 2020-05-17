@@ -34,4 +34,13 @@ RSpec.describe Word do
       expect(subject.crypted.length).to eq(subject.word.length)
     end
   end
+
+  context 'During the game' do
+
+    it 'should return boolean when letter is guessed' do
+      subject.word = 'balancer'
+      expect(subject.guess_letter('a')).to be(true)
+      expect(subject.guess_letter('y')).to be(false)
+    end
+  end
 end

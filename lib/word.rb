@@ -9,6 +9,10 @@ class Word
     @crypted = to_crypt(@word)
   end
 
+  def guess_letter(input = gets.chomp)
+    @word.include?(input)
+  end
+
   private
 
   def word_difficulty(input)

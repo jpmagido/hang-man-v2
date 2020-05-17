@@ -1,5 +1,3 @@
-#require './lib/dialog.rb'
-
 class Game
   attr_accessor :difficulty, :player_name, :word, :scaffold
 
@@ -34,11 +32,16 @@ class Game
     @word = Word.new(@difficulty)
   end
 
+  def run_game
+    turn until @scaffold.level == 8
+  end
+
   def turn
     Dialog.turn_message
     @scaffold.display
     @word.crypted
     @word.length
+    @scaffold.level_up
   end
 
   private

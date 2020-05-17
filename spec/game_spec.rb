@@ -50,6 +50,7 @@ RSpec.describe Game do
     end
 
   end
+
   context 'Run a turn' do
 
     it '#turn' do
@@ -62,6 +63,15 @@ RSpec.describe Game do
       expect(subject.scaffold).to have_received(:display)
       expect(subject.word).to have_received(:crypted)
       expect(subject.word).to have_received(:length)
+    end
+  end
+
+  context 'Run turns until game is over' do
+    it '#run_game' do
+      new_game = Game.new
+      new_game.word = Word.new
+      new_game.run_game
+      expect(new_game.scaffold.level).to eq(8)
     end
   end
 end

@@ -1,6 +1,7 @@
 require './game.rb'
 require './lib/dialog.rb'
 require './lib/scaffold.rb'
+require './lib/word.rb'
 
 RSpec.describe Game do
   context 'Start game' do
@@ -37,14 +38,30 @@ RSpec.describe Game do
       expect(subject.instance_variable_get(:@difficulty)).to eq(number)
       expect(Dialog).to have_received(:chose_difficulty)
     end
+
+    it 'should have a word parameter' do
+      subject.chose_difficulty(2)
+      expect(subject.word).to be_an_instance_of(Word)
+    end
+
+    it 'should have a scaffold parameter' do
+      subject
+      expect(subject.instance_variable_get(:@scaffold)).to be_an_instance_of(Scaffold)
+    end
+
   end
   context 'Run a turn' do
+
     it '#turn' do
       allow(Dialog).to receive(:turn_message)
-      allow(Scaffold).to receive(:display)
+      allow(subject.scaffold).to receive(:display)
+      allow(subject.word).to receive(:crypted)
+      allow(subject.word).to receive(:length)
       subject.turn
       expect(Dialog).to have_received(:turn_message)
-      expect(Scaffold).to have_received(:display)
+      expect(subject.scaffold).to have_received(:display)
+      expect(subject.word).to have_received(:crypted)
+      expect(subject.word).to have_received(:length)
     end
   end
 end

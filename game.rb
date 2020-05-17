@@ -1,11 +1,12 @@
-require './lib/dialog.rb'
+#require './lib/dialog.rb'
 
 class Game
-  attr_accessor :difficulty, :player_name
+  attr_accessor :difficulty, :player_name, :word, :scaffold
 
   def initialize
     @difficulty = 0
     @player_name = ''
+    @scaffold = Scaffold.new
   end
 
   def perform
@@ -30,11 +31,14 @@ class Game
     print '> '
     @difficulty = input_player until @difficulty.between?(1, 3)
     puts "Difficulty will be #{GRID_LEVEL[@difficulty]}"
+    @word = Word.new(@difficulty)
   end
 
   def turn
     Dialog.turn_message
-    Scaffold.display
+    @scaffold.display
+    @word.crypted
+    @word.length
   end
 
   private

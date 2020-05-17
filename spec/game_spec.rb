@@ -1,11 +1,13 @@
 require './game.rb'
 require './lib/dialog.rb'
+require './lib/scaffold.rb'
 
 RSpec.describe Game do
   context "New game" do
-    subject { Game.new }
     let(:number) { [1, 2, 3].sample }
     let(:name) { %w(luc adrien lucas jp).sample }
+
+    subject { Game.new }
 
     it 'should initialize the game' do
       subject
@@ -31,6 +33,14 @@ RSpec.describe Game do
       subject.chose_difficulty(number)
       expect(subject.instance_variable_get(:@difficulty)).to eq(number)
       expect(Dialog).to have_received(:chose_difficulty)
+    end
+
+    it 'should run one turn' do
+      allow(Dialog).to receive(:turn_message)
+      allow(Scaffold).to receive(:display)
+      subject.turn
+      expect(Dialog).to have_received(:turn_message)
+      expect(Scaffold).to have_received(:display)
     end
   end
 end

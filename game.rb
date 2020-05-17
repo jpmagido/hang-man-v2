@@ -29,8 +29,18 @@ class Game
     puts Dialog.chose_difficulty
     print '> '
     @difficulty = input_player until @difficulty.between?(1, 3)
-    puts "Difficulty will be #{@difficulty}"
+    puts "Difficulty will be #{GRID_LEVEL[@difficulty]}"
   end
+
+  def turn
+    Dialog.turn_message
+    Scaffold.display
+  end
+
+  private
+
+  GRID_LEVEL = {1 => 'easy', 2 => 'medium', 3 => 'hard'}.freeze
+
 end
 
 #Game.new.perform

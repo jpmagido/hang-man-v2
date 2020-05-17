@@ -10,4 +10,8 @@ class Dialog
   def self.chose_difficulty
     "Please chose a difficulty level: \n 1. Easy \n 2. Medium \n 3. Hard "
   end
+
+  def self.turn_message
+    "It's your turn, try and guess a letter"
+  end
 end

@@ -29,5 +29,4 @@ RSpec.describe Scaffold do
       subject.level = (0..8).to_a.sample
     end
   end
-
 end

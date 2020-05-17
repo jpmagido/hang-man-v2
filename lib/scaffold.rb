@@ -11,6 +11,7 @@ class Scaffold
     #puts ''
     #puts "il vous reste #{8 - @level} essais"
   end
+
 =begin
   def death?
     (8 - @leve#l).positive?
@@ -21,17 +22,9 @@ class Scaffold
     @level += 1
   end
 
-  LEVELS = {
-    0 => :bottom,
-    1 => :pillar,
-    2 => :top,
-    3 => :rope,
-    4 => :head,
-    5 => :arms,
-    6 => :body,
-    7 => :legs,
-    8 => :death
-  }.freeze
+  private
+
+  LEVELS = %i[bottom pillar top rope head arms body legs death].freeze
 
   def bottom
     puts ' _______________'

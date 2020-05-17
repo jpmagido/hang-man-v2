@@ -48,7 +48,6 @@ RSpec.describe Game do
       subject
       expect(subject.instance_variable_get(:@scaffold)).to be_an_instance_of(Scaffold)
     end
-
   end
 
   context 'Run a turn' do
@@ -58,19 +57,21 @@ RSpec.describe Game do
       allow(subject.scaffold).to receive(:display)
       allow(subject.word).to receive(:crypted)
       allow(subject.word).to receive(:length)
+      #allow(subject.word).to receive(:guess_letter)
       subject.turn
       expect(Dialog).to have_received(:turn_message)
       expect(subject.scaffold).to have_received(:display)
       expect(subject.word).to have_received(:crypted)
       expect(subject.word).to have_received(:length)
+        #expect(subject.word).to have_received(:guess_letter)
     end
   end
 
   context 'Run turns until game is over' do
     it '#run_game' do
       new_game = Game.new
-      new_game.word = Word.new
-      new_game.run_game
+      new_game.word = Word.new(1)
+      new_game.all_turns
       expect(new_game.scaffold.level).to eq(8)
     end
   end

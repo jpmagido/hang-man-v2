@@ -32,7 +32,7 @@ class Game
     @word = Word.new(@difficulty)
   end
 
-  def run_game
+  def all_turns
     turn until @scaffold.level == 8
   end
 
@@ -41,7 +41,7 @@ class Game
     @scaffold.display
     @word.crypted
     @word.length
-    @scaffold.level_up
+    @scaffold.level_up #unless @word.guess_letter
   end
 
   private

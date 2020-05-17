@@ -6,6 +6,8 @@ class Scaffold
   end
 
   def display
+    LEVELS[@level]
+    #Scaffold.method(LEVELS[@level])
     #puts ''
     #puts ''
     #self.send(LEVELS[@level])
@@ -19,8 +21,7 @@ class Scaffold
   def level_up
     @level += 1
   end
-
-  private
+=end
 
   LEVELS = {
     0 => :bottom,
@@ -33,7 +34,7 @@ class Scaffold
     7 => :legs,
     8 => :death
   }.freeze
-=end
+
   def bottom
     puts ' _______________'
   end

@@ -3,9 +3,7 @@ require './lib/dialog.rb'
 require './lib/scaffold.rb'
 
 RSpec.describe Game do
-  context "New game" do
-    let(:number) { [1, 2, 3].sample }
-    let(:name) { %w(luc adrien lucas jp).sample }
+  context 'Start game' do
 
     subject { Game.new }
 
@@ -20,6 +18,11 @@ RSpec.describe Game do
       subject.start
       expect(Dialog).to have_received(:start_game_message)
     end
+  end
+
+  context 'define parameters of the game' do
+    let(:number) { [1, 2, 3].sample }
+    let(:name) { %w(luc adrien lucas jp).sample }
 
     it 'user input should define the player_name' do
       allow(Dialog).to receive(:player_name_message)
@@ -34,8 +37,9 @@ RSpec.describe Game do
       expect(subject.instance_variable_get(:@difficulty)).to eq(number)
       expect(Dialog).to have_received(:chose_difficulty)
     end
-
-    it 'should run one turn' do
+  end
+  context 'Run a turn' do
+    it '#turn' do
       allow(Dialog).to receive(:turn_message)
       allow(Scaffold).to receive(:display)
       subject.turn

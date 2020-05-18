@@ -10,11 +10,11 @@ RSpec.describe Word do
   context 'initialization' do
     it 'should create a word with proper attributes' do
       subject
-      expect(subject.instance_variable_get(:@word)).not_to be_nil
-      expect(subject.word.class).to eq(String)
-      expect(subject.instance_variable_get(:@word).class).to eq(String)
-      expect(subject.instance_variable_get(:@word)).not_to be_empty
-      expect(subject.instance_variable_get(:@length)).to eq(subject.word.length)
+      expect(subject.instance_variable_get(:self_word)).not_to be_nil
+      expect(subject.self_word.class).to eq(String)
+      expect(subject.instance_variable_get(:self_word).class).to eq(String)
+      expect(subject.instance_variable_get(:self_word)).not_to be_empty
+      expect(subject.instance_variable_get(:@length)).to eq(subject.self_word.length)
     end
 
     it 'should create a word based on difficulty' do
@@ -29,16 +29,16 @@ RSpec.describe Word do
     end
 
     it 'should encrypt the word' do
-      expect(subject.crypted.values.map(&:first).join).to eq(subject.word)
-      expect(subject.crypted.values.map(&:last).join).to eq('_' * subject.word.length)
-      expect(subject.crypted.length).to eq(subject.word.length)
+      expect(subject.crypted.values.map(&:first).join).to eq(subject.self_word)
+      expect(subject.crypted.values.map(&:last).join).to eq('_' * subject.self_word.length)
+      expect(subject.crypted.length).to eq(subject.self_word.length)
     end
   end
 
   context 'During the game' do
 
     it 'should return boolean when letter is guessed' do
-      subject.word = 'balancer'
+      subject.self_word = 'balancer'
       expect(subject.guess_letter('a')).to be(true)
       expect(subject.guess_letter('y')).to be(false)
     end

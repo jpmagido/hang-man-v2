@@ -1,16 +1,16 @@
 require 'ffaker'
 
 class Word
-  attr_accessor :length, :word, :crypted
+  attr_accessor :length, :self_word, :crypted
 
   def initialize(level = 1)
-    @word = word_difficulty(level)
-    @length = @word.length
-    @crypted = to_crypt(@word)
+    @self_word = word_difficulty(level)
+    @length = @self_word.length
+    @crypted = to_crypt(@self_word)
   end
 
   def guess_letter(letter = gets.chomp)
-    @word.include?(letter)
+    @self_word.include?(letter)
   end
 
   private

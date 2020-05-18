@@ -1,9 +1,8 @@
 class Game
-  attr_accessor :difficulty, :player_name, :word, :scaffold
+  attr_accessor :difficulty, :player_name, :word, :scaffold, :guess
 
   def initialize
     @difficulty = 0
-    @player_name = ''
     @scaffold = Scaffold.new
   end
 
@@ -39,8 +38,12 @@ class Game
     @word.length
   end
 
-  def guess?(letter = gets.chomp)
-    @word.self_word.include?(letter)
+  def guess_a_letter(letter = gets.chomp)
+    @guess = @word.self_word.include?(letter)
+  end
+
+  def point_update
+    @scaffold.level_up unless @guess
   end
 
   private

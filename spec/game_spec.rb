@@ -9,9 +9,7 @@ RSpec.describe Game do
     subject { Game.new }
 
     it 'should initialize the game' do
-      subject
       expect(subject.difficulty).to eq(0)
-      expect(subject.player_name).to eq('')
     end
 
     it 'should display start Dialog' do
@@ -66,7 +64,18 @@ RSpec.describe Game do
 
     it 'should #guess' do
       subject.word = Word.new(1)
-      expect(subject.guess?(subject.word.self_word[0])).to eq(true)
+      expect(subject.guess_a_letter(subject.word.self_word[0])).to eq(true)
+      expect(subject.instance_variable_get(:@guess)).to be true
+    end
+
+    it '#point_update should add a level if necessary' do
+      subject.guess = true
+      expect { subject.point_update }
+        .to change { subject.scaffold.level }.by(0)
+
+      subject.guess = false
+      expect { subject.point_update }
+        .to change { subject.scaffold.level }.from(0).to(1)
     end
   end
 end

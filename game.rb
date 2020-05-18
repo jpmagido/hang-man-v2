@@ -6,12 +6,6 @@ class Game
     @scaffold = Scaffold.new
   end
 
-  def perform
-    start
-    create_player
-    chose_difficulty
-  end
-
   def start
     puts Dialog.start_game_message
   end

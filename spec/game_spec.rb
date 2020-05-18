@@ -48,7 +48,7 @@ RSpec.describe Game do
   end
 
   context 'Run a turn' do
-    it '#turn' do
+    it '#turn_infos' do
       allow(Dialog).to receive(:turn_message)
       allow(subject.scaffold).to receive(:display)
       allow(subject.word).to receive(:crypted)
@@ -74,6 +74,13 @@ RSpec.describe Game do
       subject.guess = false
       expect { subject.point_update }
         .to change { subject.scaffold.level }.from(0).to(1)
+    end
+
+    it 'should check if game is still on' do
+      subject.scaffold.level = 1
+      expect(subject.game_over?).to be false
+      subject.scaffold.level = 8
+      expect(subject.game_over?).to be true
     end
   end
 end

@@ -33,14 +33,31 @@ RSpec.describe Word do
       expect(subject.crypted.values.map(&:last).join).to eq('_' * subject.self_word.length)
       expect(subject.crypted.length).to eq(subject.self_word.length)
     end
+
+    it 'should remember the guessed letter' do
+      subject.guess_letter('l')
+      expect(subject.instance_variable_get(:@guessed_letter)).not_to be nil
+      expect(subject.instance_variable_get(:@guessed_letter)).to eq 'l'
+    end
+
+    it 'should remember all tries' do
+      expect(subject.instance_variable_get(:@all_guesses).class).to eq Array
+      subject.guess_letter('a')
+      subject.guess_letter('b')
+      expect(subject.all_guesses).to include('a', 'b')
+    end
   end
 
   context 'During the game' do
-
     it 'should return boolean when letter is guessed' do
-      subject.self_word = 'balancer'
+      subject.self_word = 'bateau'
+      #subject.crypted = {1 => %w[a _], 2 => %w[v _], 3 => %w[e _], 4 => %w[c _]}
       expect(subject.guess_letter('a')).to be(true)
       expect(subject.guess_letter('y')).to be(false)
+    end
+
+    xit '#update_crypted_attribute' do
+      expect { subject.update_crypted_attribute }.to change(subject, :crypted)
     end
   end
 end

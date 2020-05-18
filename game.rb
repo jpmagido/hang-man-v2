@@ -40,6 +40,10 @@ class Game
     @scaffold.level_up unless @guess
   end
 
+  def game_over?
+    @scaffold.level == 8
+  end
+
   private
 
   GRID_LEVEL = {1 => 'easy', 2 => 'medium', 3 => 'hard'}.freeze

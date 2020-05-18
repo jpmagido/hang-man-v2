@@ -10,10 +10,10 @@ RSpec.describe Word do
   context 'initialization' do
     it 'should create a word with proper attributes' do
       subject
-      expect(subject.instance_variable_get(:self_word)).not_to be_nil
+      expect(subject.instance_variable_get(:@self_word)).not_to be_nil
       expect(subject.self_word.class).to eq(String)
-      expect(subject.instance_variable_get(:self_word).class).to eq(String)
-      expect(subject.instance_variable_get(:self_word)).not_to be_empty
+      expect(subject.instance_variable_get(:@self_word).class).to eq(String)
+      expect(subject.instance_variable_get(:@self_word)).not_to be_empty
       expect(subject.instance_variable_get(:@length)).to eq(subject.self_word.length)
     end
 

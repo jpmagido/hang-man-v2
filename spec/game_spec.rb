@@ -4,14 +4,9 @@ require './lib/scaffold.rb'
 require './lib/word.rb'
 
 RSpec.describe Game do
+  subject { Game.new }
+
   context 'Start game' do
-
-    subject { Game.new }
-
-    it 'should initialize the game' do
-      expect(subject.difficulty).to eq(0)
-    end
-
     it 'should display start Dialog' do
       allow(Dialog).to receive(:start_game_message)
       subject.start
@@ -19,9 +14,13 @@ RSpec.describe Game do
     end
   end
 
-  context 'define parameters of the game' do
+  context 'should define parameters of the game' do
     let(:number) { [1, 2, 3].sample }
     let(:name) { %w(luc adrien lucas jp).sample }
+
+    it 'should initialize the game' do
+      expect(subject.difficulty).to eq(0)
+    end
 
     it 'user input should define the player_name' do
       allow(Dialog).to receive(:player_name_message)
@@ -49,7 +48,6 @@ RSpec.describe Game do
   end
 
   context 'Run a turn' do
-
     it '#turn' do
       allow(Dialog).to receive(:turn_message)
       allow(subject.scaffold).to receive(:display)
